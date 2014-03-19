@@ -276,7 +276,7 @@ class LeidenDatabase:
         results = m.search(self.database_soup.get_text())
 
         # Return entire matched sequence (PMID)
-        if results is not None:
+        if results:
             return int(results.group(1))
         else:
             raise ValueError('No entries found at given URL')
