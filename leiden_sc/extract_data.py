@@ -16,13 +16,13 @@ from macarthur_core.remapping.remapping import VariantRemapper
 
 def extract_data(leiden_database, gene_id):
     """
-    Extracts variant table data for given gene in leiden_database and submits variants for remapping to genomic coordinates.
+    Extracts variant table data for given gene in leiden_database.
 
     @param leiden_database: database containing tables of variant data for specified gene_id
     @type leiden_database: LeidenDatabase
     @param gene_id: a string with the Gene ID of the gene to be extracted.
     @type gene_id: string
-    @return: namedtuple containing remapping_batch_id_number, table_entries, and column_label entries.
+    @return: namedtuple containing table entries and column labels.
     @rtype: namedtuple
     @raise: IOError if could not get data
     """
