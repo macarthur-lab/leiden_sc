@@ -12,7 +12,6 @@ import os
 from collections import namedtuple
 from macarthur_core.io import file_io
 from macarthur_core.lovd.leiden_database import make_leiden_database
-from macarthur_core.remapping.remapping import VariantRemapper
 
 def extract_data(leiden_database, gene_id):
     """
@@ -101,32 +100,22 @@ if __name__ == '__main__':
             else:
                 print('Must specify at least one gene_list.')
 
-
         if genes:
 
-            print('---> Loading refSeq transcripts for remapping...')
-            remapper = VariantRemapper()
-
-            remapping_errors = []
-            variant_entries_found = False
-
-            # Extract data and output VCF and raw data for each gene
             for gene in genes:
                 print '---> ' + gene + ': IN PROGRESS...'
                 print '    ---> Downloading data...'
 
-                # Extract table data
+                # Extract table data and save to file
                 try:
                     table_data, column_labels = extract_data(database, gene)
-                    variant_entries_found = True
+
+                    print '    ---> Saving raw data...'
+                    table_data.insert(0, column_labels)
+                    output_file_name = os.path.join(output_directory, gene + '.txt')
+
+                    file_io.write_table_to_file(output_file_name, table_data)
                 except ValueError as e:
                     print '    ---> ' + str(e)
-                    variant_entries_found = False
-
-            print '    ---> Saving raw data...'
-            table_data.insert(0, column_labels)
-            output_file_name = os.path.join(output_directory, gene + '.txt')
-
-            file_io.write_table_to_file(output_file_name, table_data)
 
             print('---> All genes complete.')
