@@ -9,7 +9,6 @@ For help, execute: python extract_data.py --help
 
 import argparse
 import os
-from collections import namedtuple
 from macarthur_core.io import file_io
 from macarthur_core.lovd.leiden_database import make_leiden_database
 
@@ -21,10 +20,11 @@ def extract_data(leiden_database, gene_id):
     @type leiden_database: LeidenDatabase
     @param gene_id: a string with the Gene ID of the gene to be extracted.
     @type gene_id: string
-    @return: namedtuple containing table entries and column labels.
-    @rtype: namedtuple
+    @return: tuple containing table entries, column labels.
+    @rtype: tuple containing 2D list and list respectively
     @raise: IOError if could not get data
     """
+    
     try:
         leiden_database.set_gene_id(gene_id)
         column_labels = leiden_database.get_table_headers()
@@ -33,8 +33,7 @@ def extract_data(leiden_database, gene_id):
     except Exception as e:
         raise e
 
-    results = namedtuple('results', 'table_entries, column_labels')
-    return results(table_entries, column_labels)
+    return table_entries, column_labels
 
 if __name__ == '__main__':
     # Command line interface definition
