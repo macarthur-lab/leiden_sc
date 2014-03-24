@@ -27,7 +27,7 @@ def get_pmid(link_url):
     results = m.search(link_url)
 
     # Return entire matched sequence (PMID)
-    if results is not None:
+    if results:
         return results.group()
     else:
         raise ValueError('Input URL did not contain 4+ digit number.')
@@ -53,7 +53,7 @@ def get_omimid(link_url):
     results = m.search(link_url)
 
     # Return entire matched sequence (OMIM ID)
-    if results is not None:
+    if results:
         return results.group()
     else:
         raise ValueError('Input URL did not contain valid OMIM ID.')

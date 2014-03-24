@@ -141,7 +141,7 @@ class LeidenDatabase:
         @rtype: string
         """
 
-        raise Exception("ABSTRACT METHOD NOT IMPLEMENTED")
+        raise NotImplementedError("ABSTRACT METHOD NOT IMPLEMENTED")
 
     def get_gene_homepage_url(self):
         """
@@ -152,7 +152,7 @@ class LeidenDatabase:
         @rtype: string
         """
 
-        raise Exception("ABSTRACT METHOD NOT IMPLEMENTED")
+        raise NotImplementedError("ABSTRACT METHOD NOT IMPLEMENTED")
 
     def get_available_genes(self):
         """
@@ -163,7 +163,7 @@ class LeidenDatabase:
         @rtype: string
         """
 
-        raise Exception("ABSTRACT METHOD NOT IMPLEMENTED")
+        raise NotImplementedError("ABSTRACT METHOD NOT IMPLEMENTED")
 
     def get_link_urls(self, link_result_set):
         """
@@ -221,7 +221,7 @@ class LeidenDatabase:
         labels are found.
         """
 
-        raise Exception("ABSTRACT METHOD NOT IMPLEMENTED")
+        raise NotImplementedError("ABSTRACT METHOD NOT IMPLEMENTED")
 
     def get_table_data(self):
         """
@@ -258,7 +258,7 @@ class LeidenDatabase:
         @rtype: 2D list of strings (1st dimension is rows, 2nd is columns)
         """
 
-        raise Exception("ABSTRACT METHOD NOT IMPLEMENTED")
+        raise NotImplementedError("ABSTRACT METHOD NOT IMPLEMENTED")
 
     def get_total_variant_count(self):
         """
@@ -276,7 +276,7 @@ class LeidenDatabase:
         results = m.search(self.database_soup.get_text())
 
         # Return entire matched sequence (PMID)
-        if results is not None:
+        if results:
             return int(results.group(1))
         else:
             raise ValueError('No entries found at given URL')
